@@ -27,4 +27,6 @@ for x in link:
     info = {'title':head, 'url':url}
     python.append(info)
 
-print(python)
+with open("scrape.txt", "w") as file:
+    for x in python:
+        file.write(str(x))
