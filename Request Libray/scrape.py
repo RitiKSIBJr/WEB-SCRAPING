@@ -1,9 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
-from lxml import html
+# from lxml import html
+import os
+import json
 
 #request
 base_url = "https://github.com/topics/python"
+
+
 response = requests.get(base_url)
 
 # Beautifulsoup4
@@ -27,6 +31,6 @@ for x in link:
     info = {'title':head, 'url':url}
     python.append(info)
 
-with open("scrape.txt", "w") as file:
+with open("scrape.json", "w") as file:
     for x in python:
-        file.write(str(x))
+        json.dump(x, file)
