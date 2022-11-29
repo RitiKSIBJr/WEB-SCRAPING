@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import json
+import os
 
 def scrape(base_url):
     python = []
@@ -22,17 +23,22 @@ def scrape(base_url):
                 python.append(info)
 
     with open('scrape.json', 'a') as file:
-        json.dump(python, file, indent=2)
+        json.dump(python, file, indent=1)
 
 def status_code(base_url):
     try:
         response = requests.get(base_url)
-        scrape(base_url)
-        return response.status_code
+        file = os.path.exists(r"C:\Users\lette\OneDrive\Desktop\Web Scraping\Request Libray\scrape.json")
+        return response.status_code , file
 
     except requests.exceptions.RequestException as e:
         raise e
 
+def count_items():
+    with open('scrape.json', 'r') as file:
+        return len(json.load(file))
 
 if __name__ == "__main__":
+
     status_code(base_url='https://github.com/topic/python')
+    count_items()
