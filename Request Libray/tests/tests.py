@@ -1,10 +1,9 @@
-import pytest
-from scrape import status_code
-import os
+from scrape import status_code, count_items
 
 def test_status_code():
-    assert status_code('https://github.com/topic/python') == 200
+    status, file = status_code('https://github.com/topic/python') 
+    assert status == 200 and file
 
-def test_file():
-    assert os.path.exists(r"C:\Users\lette\OneDrive\Desktop\Web Scraping\Request Libray\scrape.json")
+def test_item():
+    assert count_items() == 180
     
