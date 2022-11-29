@@ -24,14 +24,15 @@ def scrape(base_url):
     with open('scrape.json', 'a') as file:
         json.dump(python, file, indent=2)
 
-def check_url(base_url):
+def status_code(base_url):
     try:
         response = requests.get(base_url)
+        scrape(base_url)
+        return response.status_code
+
     except requests.exceptions.RequestException as e:
         raise e
-    else:
-        scrape(base_url)
-  
+
 
 if __name__ == "__main__":
-    check_url(base_url='https://github.com/topic/python')
+    status_code(base_url='https://github.com/topic/python')
